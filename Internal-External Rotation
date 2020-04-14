@@ -1,0 +1,26 @@
+"""
+@author: andrewsu
+"""
+import c3d_Data as c3d_Data
+import trajectory_Dtype as tr
+import numpy as np
+import matplotlib.pyplot as plt
+import glob
+from Plot_Foot_Distances import getMaxDistance
+from c3d_Data import C3DData
+
+norm_sw = []
+
+#022 Pre
+#022 Left
+file = '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/SRW/SRW_Data/BMEL-20-02-022 (S25)/BMEL-20-02-022-2019-06-17-NormalGait-Left01.c3d'
+
+tri =  C3DData(file)
+startFrame = tri.frames[0]
+times = [137,202]
+
+LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+sw = []
