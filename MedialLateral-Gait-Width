@@ -1,0 +1,57 @@
+"""
+Created on Tue Mar  3 16:02:23 2020
+
+@author: andrewsu
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from pylab import rcParams
+from scipy import stats
+
+from StanceWidthPre import StanceWidthPre
+from StanceWidthThree import StanceWidthThree
+from StanceWidthSix import StanceWidthSix
+
+norm_sw_pre = StanceWidthPre()
+norm_sw_three = StanceWidthThree()
+norm_sw_six = StanceWidthSix()
+
+pre_mean = np.mean(norm_sw_pre)
+pre_median = np.median(norm_sw_pre)
+pre_stdev = np.std(norm_sw_pre)
+
+three_mean = np.mean(norm_sw_three)
+three_median = np.median(norm_sw_three)
+three_stdev = np.std(norm_sw_three)
+
+six_mean = np.mean(norm_sw_six)
+six_median = np.median(norm_sw_six)
+six_stdev = np.std(norm_sw_six)
+
+statistic, pvalue = stats.f_oneway(norm_sw_pre, norm_sw_three, norm_sw_six)
+
+# Generate box plot
+fig = plt.figure(1, dpi=200)
+ax = fig.add_subplot(111)
+rcParams["figure.figsize"] = 18, 9
+plt.title("Stance Width", fontsize=24, fontname='Times New Roman')
+plt.xticks(size = 18, fontname='Times New Roman')
+plt.yticks(size = 18, fontname='Times New Roman')
+plt.ylabel('Distance (% of Leg Length)', fontsize=18, fontname='Times New Roman')
+plt.grid('on')
+
+labels = ['Pre-Op', '3 Months Post-Op', '6 Months Post-Op']
+boxprops = dict(linewidth=5)
+flierprops = dict(linewidth=5)
+whiskerprops = dict(linewidth=5)
+medianprops = dict(linewidth=5, color='blue')
+capprops = dict(linewidth=5)
+line1 = ax.boxplot([norm_sw_pre, norm_sw_three, norm_sw_six], labels=labels, 
+                   boxprops=boxprops, flierprops=flierprops, 
+                   whiskerprops=whiskerprops, capprops=capprops, 
+                    medianprops=medianprops, meanline=True)
+#plt.text(0.73, 155, 'median = \n{:.2f}'.format(PreOpMedian), size = 24, fontname='Times New Roman')
+#plt.text(2.1, 158, 'median = \n{:.2f}'.format(ThreeMonthMedian), size = 24, fontname='Times New Roman')
+plt.style.use('seaborn')
+plt.savefig('Boxplot.png')
