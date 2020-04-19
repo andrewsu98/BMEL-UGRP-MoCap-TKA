@@ -10,20 +10,246 @@ from Plot_Foot_Distances import getMaxDistance
 from c3d_Data import C3DData
 from GetAngle import get_vector, unit_vector, get_angle
 
-#%% 022 Pre
+IERanglePre = []
 
-#022 Left
-file = '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-022 (S25)/BMEL-20-02-022-2019-06-17-NormalGait-Left01.c3d'
+#022 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-022 (S25)/BMEL-20-02-022-2019-06-17-NormalGait-Left01.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-022 (S25)/BMEL-20-02-022-2019-06-17-NormalGait-Right01.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
 
-tri =  C3DData(file)
-startFrame = tri.frames[0]
+#023 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-023 (S26)/BMEL-20-02-023-2019-06-20-NormalGait-Left02.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-023 (S26)/BMEL-20-02-023-2019-06-20-NormalGait-Right02.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
 
-LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
-RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
-LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
-RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
-LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
-RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
-LKVunit = unit_vector(LeftKneeVector)
-RKVunit = unit_vector(RightKneeVector)
-IERangle = get_angle(LKVunit, RKVunit)
+#024 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-024 (S27)/BMEL-20-02-024-2019-06-20-NormalGait-Left03.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-024 (S27)/BMEL-20-02-024-2019-06-20-NormalGait-Right03.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+
+#025 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-025 (S28)/BMEL-20-02-025-2019-07-01-NormalGait-Left03.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-025 (S28)/BMEL-20-02-025-2019-07-01-NormalGait-Right04.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+
+#026 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-026 (S31)/BMEL-20-02-026-2019-07-11-NormalGait-Left04.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-026 (S31)/BMEL-20-02-026-2019-07-11-NormalGait-Right02.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+
+#027 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-027 (S32)/BMEL-20-02-027-2019-07-11-NormalGait-Left04.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-027 (S32)/BMEL-20-02-027-2019-07-11-NormalGait-Right01.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+
+#028 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-028 (S33)/BMEL-20-02-028-2019-07-11-NormalGait-Left01.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-028 (S33)/BMEL-20-02-028-2019-07-11-NormalGait-Right01.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+
+# #029 Pre
+# file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-029 (S34)/BMEL-20-02-029-2019-07-25-NormalGait-Left02.c3d',
+#         '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-029 (S34)/BMEL-20-02-029-2019-07-25-NormalGait-Right02.c3d']
+# for i in range(len(file)):
+#     tri =  C3DData(file[i])
+    
+#     LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+#     RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+#     LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+#     RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+#     LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+#     RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+#     LKVunit = unit_vector(LeftKneeVector)
+#     RKVunit = unit_vector(RightKneeVector)
+#     if len(LKVunit) > len(RKVunit):
+#         for i in range(len(RKVunit)):
+#             angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+#             IERanglePre.append(angle)
+#     else:
+#         for i in range(len(LKVunit)):
+#             angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+#             IERanglePre.append(angle)
+
+#030 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-030 (S35)/BMEL-20-02-030-2019-08-01-NormalGait-Left04.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-030 (S35)/BMEL-20-02-030-2019-08-01-NormalGait-Right03.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+
+#031 Pre
+file = ['/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-031 (S36)/BMEL-20-02-031-2019-08-01-NormalGait-Left02.c3d',
+        '/Users/andrewsu/Library/Mobile Documents/com~apple~CloudDocs/Texas A&M University/3/Spring/MEEN 491/Code/SRW_Data/BMEL-20-02-031 (S36)/BMEL-20-02-031-2019-08-01-NormalGait-Right01.c3d']
+for i in range(len(file)):
+    tri =  C3DData(file[i])
+    
+    LMedKNE = tr.Trajectory(*tri.get_trajectory('LMedKNE',tri.labels,tri.trajectories)).data
+    RMedKNE = tr.Trajectory(*tri.get_trajectory('RMedKNE',tri.labels,tri.trajectories)).data
+    LKNE    = tr.Trajectory(*tri.get_trajectory('LKNE',tri.labels,tri.trajectories)).data
+    RKNE    = tr.Trajectory(*tri.get_trajectory('RKNE',tri.labels,tri.trajectories)).data
+    
+    LeftKneeVector = get_vector(LKNE[:, 0:2], LMedKNE[:, 0:2])
+    RightKneeVector = get_vector(RKNE[:, 0:2], RMedKNE[:, 0:2])
+    LKVunit = unit_vector(LeftKneeVector)
+    RKVunit = unit_vector(RightKneeVector)
+    if len(LKVunit) > len(RKVunit):
+        for i in range(len(RKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+    else:
+        for i in range(len(LKVunit)):
+            angle = np.arccos(np.dot(LKVunit[i], RKVunit[i])) * 90/np.pi
+            IERanglePre.append(angle)
+
+IERanglePre = np.asarray(IERanglePre)
